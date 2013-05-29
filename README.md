@@ -1,4 +1,4 @@
 C-Libraries
 ===========
 
-My simple C libraries.
+My C datastructures.
