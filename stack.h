@@ -1,12 +1,14 @@
-typedef struct stack_t stack_t;
+typedef struct stack_ stack_;
 
-typedef struct stack_t{
-        stack_t* next;
+struct stack_{
+        stack_* next;
         void* data;
-}
+};
 
-void new_stack(void* data);
-void free_stack(stack_t** stack);
-void push(void* data);
-void* pop();
-void* top()
+stack_* new_stack(void* data);
+
+void free_stack(stack_** stack);
+
+void push(stack_** stack, void* data);
+
+void* pop(stack_** stack);
