@@ -1,9 +1,10 @@
+#include <stdlib.h>
 #define ARENA_SIZE 1024*1024
 typedef struct arena_t arena_t;
 struct arena_t
 {
         char*   current;
-        char    buffert[ARENA_SIZE];
+        char    buffer[ARENA_SIZE];
 };
 
 arena_t* new_arena();

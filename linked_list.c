@@ -4,42 +4,46 @@
 
 list_t* new_list(void* data)
 {
-        list_t*         list = malloc(sizeof(list_t));
-        if(list == NULL)
+        list_t*         list;
+        if(myfree_list != NULL)
         {
-                printf("Could not retrive any memory");
-                return;
-        }
-        else
-        {
-                list->data = data;
-                list->prev = list;
-                list->next = list;
-                return list;
-        }
+                list = myfree_list;
+                myfree_list = myfree_list->next;
+        }else{
+                list = malloc(sizeof(list_t));
+                if(list == NULL)
+                {
+                        printf("Could not retrive any memory");
+                        return;
+                }
+        }       
+        list->data = data;
+        list->prev = list;
+        list->next = list;
+        return list;
 }
 
 
 void free_list(list_t** list)
 {
-        list_t*         freed_list = *list;
-        list_t*         temp_node;
+        list_t*         head = *list;
         
-        if(freed_list == NULL)
-        {
-                printf("The list was NULL");
-                return;
-        }
-        
-        freed_list->prev->next = NULL;
-       
-        do{
-                temp_node = freed_list->next;
-                free(freed_list);
-                freed_list = temp_node;
-        }while(freed_list->next != NULL);
-       
+        head->prev->next = myfree_list;
+        myfree_list = head;
         *list = NULL;
+}
+
+void free_list_memory(void)
+{       
+        list_t*         a;
+        list_t*         b;
+        a = myfree_list;
+        while(a != NULL)
+        {
+                b = a->next;
+                free(a);
+                a = b;
+        }
 }
 
 void insert_first(list_t** list, void* data)

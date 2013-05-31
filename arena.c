@@ -25,13 +25,14 @@ void* alloc(arena_t* arena, size_t size)
         size_t          remaining;
         void*           data;
         
-        remaning = ARENA_SIZE - (arena->current - &arena->buffer[0]);
-        if(size > remaning)
+        remaining = ARENA_SIZE - (arena->current - &arena->buffer[0]);
+        if(size > remaining)
         {
                 return NULL;
         }
         data = arena->current;
-        current += size;
+        arena->current += size;
         return data;
-        
 }
+
+int main(void){return 1;}

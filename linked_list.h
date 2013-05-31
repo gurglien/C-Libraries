@@ -5,9 +5,13 @@ struct list_t{
         void* data;
 };
 
+static list_t* myfree_list;
+
 list_t* new_list(void* data);
 
 void free_list(list_t** list);
+
+void free_list_memory(void);
 
 void insert_first(list_t** list, void* data);
 
