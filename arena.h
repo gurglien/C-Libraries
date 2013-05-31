@@ -4,7 +4,7 @@ struct arena_t
 {
         char*   current;
         char    buffert[ARENA_SIZE];
-}
+};
 
 arena_t* new_arena();
 
